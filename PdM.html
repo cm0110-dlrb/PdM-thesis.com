@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Predictive Maintenance</title>
+        <link rel="stylesheet" href="design.css">
+        <script src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="2j0vwsb4gwpqnbc"></script>
+    </head>
+    <body>
+        <div class="home">
+           <form action="/upload" class="dropbox-btn">
+
+            <input type="hidden" name="file_namme" value="data.csv"/>
+            <button class="dropbox-btn" id="upload-btn">Upload Data</button>
+           </form>
+        </div>
+
+        <script>
+            var button = Dropbox.createChooseButton({success: function(files){
+                if (files[0].name.endsWith('.csv')) {
+                    document.getElementById('upload-btn').click();
+                }else{
+                    alert('Please Upload a CSV file.');
+                }
+            },
+            cancel: function(){
+
+            },
+            linkType: 'direct',
+            multiselect: false,
+            extensions: ['.csv']
+        });
+
+        document.getElementById('upload-btn').appendChild(button);
+        </script>
+    </body>
+</html>
