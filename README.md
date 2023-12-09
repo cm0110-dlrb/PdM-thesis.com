@@ -1,1 +1,3 @@
-#theme: jekyll-theme-minimal
+# _config.yml
+source: /docs
+destination: /docs/_site
