@@ -4,35 +4,43 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Predictive Maintenance</title>
         <link rel="stylesheet" href="design.css">
-        <script src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="2j0vwsb4gwpqnbc"></script>
+       <script src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="2j0vwsb4gwpqnbc"></script>
     </head>
     <body>
         <div class="home">
            <form action="/upload" class="dropbox-btn">
 
             <input type="hidden" name="file_namme" value="data.csv"/>
-            <button class="dropbox-btn" id="upload-btn">Upload Data</button>
+            <button id="dropbox-btn">Choose file from Dropbox</button>
            </form>
         </div>
 
+
         <script>
+    // Add an event listener to the button
+    document.getElementById('dropbox-btn').addEventListener('click', function () {
+        // Open the Chooser dialog
+        Dropbox.choose({
+            success: function (files) {
+                // Handle the selected files
+                console.log(files);
+            }
             var button = Dropbox.createChooseButton({success: function(files){
                 if (files[0].name.endsWith('.csv')) {
                     document.getElementById('upload-btn').click();
                 }else{
                     alert('Please Upload a CSV file.');
-                }
-            },
-            cancel: function(){
-
+                },
+            cancel: function () {
             },
             linkType: 'direct',
-            multiselect: false,
+            multiselect: false 
             extensions: ['.csv']
         });
+    });
+</script>
 
-        document.getElementById('upload-btn').appendChild(button);
-        </script>
+       
         <script src="jvs.js"></script>
     </body>
 </html>
